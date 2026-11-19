@@ -1,0 +1,451 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "VoltaSegura — VoltaSegura.Api",
+    "description": "Protótipo acadêmico. Roteamento mock e acervo sintético identificados na resposta; exposição estimada não é garantia.",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/ocorrencias/bairros": {
+      "get": {
+        "tags": [
+          "Estatisticas"
+        ],
+        "summary": "Ranking dos bairros com mais boletins distintos.",
+        "description": "O percentual é calculado sobre o total de boletins que atendem aos filtros, não só sobre o ranking.",
+        "parameters": [
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Quantidade de bairros no ranking (1 a 50; padrão 10).",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "natureza",
+            "in": "query",
+            "description": "Filtro opcional por NATUREZA_APURADA (ex.: \"ROUBO - OUTROS\").",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "faixa",
+            "in": "query",
+            "description": "Filtro opcional por faixa do dia (1=madrugada, 2=manhã, 3=tarde, 4=noite).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ocorrencias/naturezas": {
+      "get": {
+        "tags": [
+          "Estatisticas"
+        ],
+        "summary": "Boletins distintos por natureza apurada, indicando quais compõem a comparação de trajetos.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ocorrencias/faixas": {
+      "get": {
+        "tags": [
+          "Estatisticas"
+        ],
+        "summary": "Distribuição dos boletins pelas faixas do dia, incluindo os registros sem faixa informada.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ocorrencias": {
+      "get": {
+        "tags": [
+          "Ocorrencias"
+        ],
+        "summary": "Resumo agregado por bairro e faixa do dia, com o período consultado sempre explícito.",
+        "parameters": [
+          {
+            "name": "bairro",
+            "in": "query",
+            "description": "Filtro opcional por bairro (nome exato da SSP-SP).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "natureza",
+            "in": "query",
+            "description": "Filtro opcional por NATUREZA_APURADA (decisões do grupo — ex.: \"FURTO - OUTROS\").",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rubrica",
+            "in": "query",
+            "description": "Filtro opcional por rubrica (conservada para auditoria — decisões do grupo).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "faixa",
+            "in": "query",
+            "description": "Filtro opcional por faixa do dia (1=madrugada, 2=manhã, 3=tarde, 4=noite).",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/trajetos": {
+      "get": {
+        "tags": [
+          "Trajetos"
+        ],
+        "summary": "Lista os trajetos salvos (os 50 mais recentes).",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Persistência desativada (padrão).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Trajetos"
+        ],
+        "summary": "Salva um trajeto (ida ou volta) com seus trechos.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoTrajeto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoTrajeto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoTrajeto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Trajeto criado."
+          },
+          "400": {
+            "description": "Trechos ausentes ou inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Persistência desativada (padrão).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trajetos/{id}": {
+      "get": {
+        "tags": [
+          "Trajetos"
+        ],
+        "summary": "Detalha um trajeto salvo, com seus trechos em ordem.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador do trajeto.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Trajetos"
+        ],
+        "summary": "Remove um trajeto salvo e seus trechos.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador do trajeto.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/trajetos/resumo": {
+      "post": {
+        "tags": [
+          "Trajetos"
+        ],
+        "summary": "Calcula o resumo de um trajeto sem gravá-lo: distâncias, % caminhado, baldeações e trechos por modo.",
+        "description": "Usa as regras do domínio (`Trajeto.DistanciaTotalKm`, `KmCaminhados` e `Baldeacoes`).\r\nNada é persistido e as coordenadas informadas não são registradas.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoResumo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoResumo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequisicaoResumo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Trechos ausentes, modo desconhecido ou comprimento inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Coordenada": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "RequisicaoResumo": {
+        "type": "object",
+        "properties": {
+          "trechos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrechoRequisicao"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Corpo do cálculo de resumo (apenas os trechos)."
+      },
+      "RequisicaoTrajeto": {
+        "type": "object",
+        "properties": {
+          "nomeOrigem": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeDestino": {
+            "type": "string",
+            "nullable": true
+          },
+          "sentido": {
+            "type": "string",
+            "nullable": true
+          },
+          "trechos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrechoRequisicao"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Corpo de criação de trajeto."
+      },
+      "TrechoRequisicao": {
+        "type": "object",
+        "properties": {
+          "modo": {
+            "type": "string",
+            "description": "WALK, BUS, SUBWAY, RAIL ou TRAM.",
+            "nullable": true
+          },
+          "comprimentoKm": {
+            "type": "number",
+            "description": "Distância do trecho, em km (≥ 0).",
+            "format": "double"
+          },
+          "pontos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coordenada"
+            },
+            "description": "Coordenadas de exemplo (opcional).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Trecho do corpo da requisição."
+      }
+    }
+  }
+}

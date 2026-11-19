@@ -1,0 +1,31 @@
+{
+  "fonte": "Carga SINTÉTICA de demonstração (80 registros fictícios). Não são dados da SSP-SP.",
+  "exemplo": true,
+  "sobreOsDados": [
+    "Consulte a fonte indicada na resposta; registros de demonstração são sintéticos.",
+    "A cobertura dos dados varia por região e período — leia a cobertura antes de comparar.",
+    "Quando os dados são insuficientes, a comparação não é concluída — nunca há resposta silenciosa."
+  ],
+  "itens": [
+    {
+      "natureza": "FURTO - OUTROS",
+      "boletinsDistintos": 27,
+      "entraNaComparacao": true
+    },
+    {
+      "natureza": "ROUBO - OUTROS",
+      "boletinsDistintos": 27,
+      "entraNaComparacao": true
+    },
+    {
+      "natureza": "FURTO DE VEÍCULO",
+      "boletinsDistintos": 13,
+      "entraNaComparacao": false
+    },
+    {
+      "natureza": "ROUBO DE VEÍCULO",
+      "boletinsDistintos": 13,
+      "entraNaComparacao": false
+    }
+  ]
+}

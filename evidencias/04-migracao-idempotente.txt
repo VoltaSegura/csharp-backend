@@ -1,0 +1,4 @@
+$ dotnet run --no-build --no-launch-profile --project VoltaSegura.Api -- --migrar
+info: Microsoft.EntityFrameworkCore.Migrations[20405]
+      No migrations were applied. The database is already up to date.
+Migrações aplicadas. 

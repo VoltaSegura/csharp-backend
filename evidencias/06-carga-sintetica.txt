@@ -1,0 +1,6 @@
+$ dotnet run --no-build --no-launch-profile --project VoltaSegura.Api -- --demonstracao
+info: Microsoft.EntityFrameworkCore.Migrations[20405]
+      No migrations were applied. The database is already up to date.
+warn: Microsoft.EntityFrameworkCore.Query[10103]
+      The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+Migrações aplicadas. Acervo SINTÉTICO pronto.

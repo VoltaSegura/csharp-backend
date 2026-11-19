@@ -1,43 +1,12 @@
-# Git
-
-.DS_Store
-Thumbs.db
-
-# Editores
-.vscode/
-.idea/
-*.swp
-
-# Python (src/ml e utilidades)
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-.ipynb_checkpoints/
-
-# Node / Expo (src/mobile-app)
-node_modules/
-.expo/
-dist/
-*.log
-
-# .NET (src/csharp-backend)
+# Artefatos de build .NET
 bin/
 obj/
 *.user
+*.suo
 
-# Segredos e chaves
-.env
-.env.*
-!/.env.example
-*.pem
-*.key
-# ⚠️ Nunca commitar chaves de API (ex.: SPTrans Olho Vivo) — use variáveis de ambiente.
-
-# ---- Datasets brutos (grandes; registro em src/ml/dados/README.md) ----
-utils/infosiga/*.zip
-utils/ssp/*.xlsx
-utils/ssp/*.PNG
-
-# ---- cache de ML (regenerável via src/ml/etl.py) ----
-src/ml/dados/cache/
+# Banco de dados local de desenvolvimento (regenerável via migrations + ETL)
+dados/
+*.db
+*.db-shm
+*.db-wal
+.vs

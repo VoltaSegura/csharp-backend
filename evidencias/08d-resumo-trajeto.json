@@ -1,0 +1,34 @@
+{
+  "requisicao": {
+    "trechos": [
+      {
+        "modo": "WALK",
+        "comprimentoKm": 0.5
+      },
+      {
+        "modo": "BUS",
+        "comprimentoKm": 4.0
+      },
+      {
+        "modo": "SUBWAY",
+        "comprimentoKm": 3.0
+      },
+      {
+        "modo": "WALK",
+        "comprimentoKm": 0.3
+      }
+    ]
+  },
+  "resposta": {
+    "distanciaTotalKm": 7.8,
+    "kmCaminhados": 0.8,
+    "percentualCaminhado": 10.3,
+    "quantidadeTrechos": 4,
+    "baldeacoes": 1,
+    "trechosPorModo": {
+      "WALK": 2,
+      "BUS": 1,
+      "SUBWAY": 1
+    }
+  }
+}

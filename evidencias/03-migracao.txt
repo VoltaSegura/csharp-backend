@@ -1,0 +1,6 @@
+$ dotnet run --no-build --no-launch-profile --project VoltaSegura.Api -- --migrar
+info: Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20261112030004_MigracaoInicial'.
+info: Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20261119024129_ProvenienciaAcervo'.
+Migrações aplicadas. 

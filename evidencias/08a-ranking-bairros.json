@@ -1,0 +1,36 @@
+{
+  "fonte": "Carga SINTÉTICA de demonstração (80 registros fictícios). Não são dados da SSP-SP.",
+  "exemplo": true,
+  "sobreOsDados": [
+    "Consulte a fonte indicada na resposta; registros de demonstração são sintéticos.",
+    "A cobertura dos dados varia por região e período — leia a cobertura antes de comparar.",
+    "Quando os dados são insuficientes, a comparação não é concluída — nunca há resposta silenciosa."
+  ],
+  "itens": [
+    {
+      "bairro": "Bela Vista",
+      "boletinsDistintos": 10,
+      "percentual": 12.5
+    },
+    {
+      "bairro": "Bom Retiro",
+      "boletinsDistintos": 10,
+      "percentual": 12.5
+    },
+    {
+      "bairro": "Cerqueira César",
+      "boletinsDistintos": 10,
+      "percentual": 12.5
+    },
+    {
+      "bairro": "Consolação",
+      "boletinsDistintos": 10,
+      "percentual": 12.5
+    },
+    {
+      "bairro": "Liberdade",
+      "boletinsDistintos": 10,
+      "percentual": 12.5
+    }
+  ]
+}

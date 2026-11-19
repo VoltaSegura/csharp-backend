@@ -1,0 +1,36 @@
+{
+  "fonte": "Carga SINTÉTICA de demonstração (80 registros fictícios). Não são dados da SSP-SP.",
+  "exemplo": true,
+  "sobreOsDados": [
+    "Consulte a fonte indicada na resposta; registros de demonstração são sintéticos.",
+    "A cobertura dos dados varia por região e período — leia a cobertura antes de comparar.",
+    "Quando os dados são insuficientes, a comparação não é concluída — nunca há resposta silenciosa."
+  ],
+  "itens": [
+    {
+      "faixa": "Madrugada",
+      "boletinsDistintos": 20,
+      "percentual": 25
+    },
+    {
+      "faixa": "Manha",
+      "boletinsDistintos": 20,
+      "percentual": 25
+    },
+    {
+      "faixa": "Tarde",
+      "boletinsDistintos": 20,
+      "percentual": 25
+    },
+    {
+      "faixa": "Noite",
+      "boletinsDistintos": 16,
+      "percentual": 20
+    },
+    {
+      "faixa": "SemFaixa",
+      "boletinsDistintos": 4,
+      "percentual": 5
+    }
+  ]
+}

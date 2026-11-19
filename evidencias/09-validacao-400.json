@@ -1,0 +1,6 @@
+{
+  "httpStatus": 400,
+  "resposta": {
+    "erro": "Faixa deve estar entre 1 e 4."
+  }
+}
